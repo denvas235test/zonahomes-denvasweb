@@ -39,7 +39,7 @@ const business = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {(noindex || !SITE.indexable) && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#FBFAF7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 

@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../data/site';
+const { quoteHref = '/contact/' } = Astro.props as { quoteHref?: string };
+---
+<div class="mobile-bar" role="region" aria-label="Quick contact">
+  <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call now</a>
+  <a class="btn btn-line" href={quoteHref}>Get a quote</a>
+</div>

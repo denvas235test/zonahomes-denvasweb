@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Faq from '../../components/Faq.astro';
+import { cities, cityBySlug } from '../../data/cities';
+import { services } from '../../data/services';
+import { SITE, TOWNS } from '../../data/site';
+
+export function getStaticPaths() {
+  return cities.map((c) => ({ params: { city: c.slug }, props: { slug: c.slug } }));
+}
+const c = cityBySlug(Astro.props.slug);
+const path = `/areas/${c.slug}/`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Areas', href: '/areas/' }, { name: c.name }];
+const nearbyLinks = c.nearby.map((n) => ({ name: n, page: TOWNS.find((t) => t.name === n)?.page }));
+const jsonLd = [
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x.name, item: SITE.url + (x.href ?? path) })) },
+  { '@type': 'Service', name: `Painting, epoxy floors and home repairs in ${c.name}, FL`, provider: { '@id': `${SITE.url}/#business` }, areaServed: { '@type': 'City', name: c.name }, url: SITE.url + path },
+  { '@type': 'FAQPage', mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<BaseLayout title={c.metaTitle} description={c.metaDescription} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>{c.h1}</h1>
+          <p class="lead">{c.intro}</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          </div>
+        </div>
+        <QuoteForm variant="short" note={`Tell us what you need in ${c.name} and we will call you back.`} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap">
+      <div class="section-head"><h2>Services in {c.name}</h2></div>
+      <div class="link-grid">
+        {services.map((s) => <a href={`/services/${s.slug}/`}><strong>{s.name}</strong><span>{s.card}</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap prose">
+      {c.sections.map((s) => (<><h2>{s.title}</h2><p>{s.text}</p></>))}
+      <p>Property manager or landlord in {c.name}? See our <a href="/property-managers/">make-ready service for unit turns</a>.</p>
+      <h2>Nearby cities we serve</h2>
+      <div class="city-chips">
+        {nearbyLinks.map((n) => n.page ? <a href={`/areas/${n.page}/`}>{n.name}</a> : <span>{n.name}</span>)}
+        <a href="/areas/">All areas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-white">
+    <div class="wrap"><Faq items={c.faqs} title={`${c.name} questions`} /></div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Need work done in {c.name}?</h2>
+      <p>Call now or send the form and we will get back to you.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote">Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

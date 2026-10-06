@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { SITE } from '../data/site';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Contact' }];
+const jsonLd = [
+  { '@type': 'ContactPage', name: 'Contact Zona Homes Services', url: SITE.url + '/contact/', about: { '@id': `${SITE.url}/#business` } },
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? '/contact/') })) },
+];
+---
+<BaseLayout
+  title="Contact & Get a Quote | Zona Homes Services, Sebring FL"
+  description="Call (863) 449-1949 or send the quote form. Zona Homes Services is based in Sebring, FL and serves nearby cities within about 60 miles."
+  path="/contact/"
+  jsonLd={jsonLd}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Contact Zona Homes Services</h1>
+          <p class="lead">Call us or send the form with your city and the job. We will call you back to talk through it and give you a price.</p>
+          <a class="phone-big" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />{SITE.phoneDisplay}</a>
+          <ul class="contact-points">
+            <li><Icon name="check" />Based in Sebring, FL</li>
+            <li><Icon name="check" />Serving nearby cities within about 60 miles</li>
+            <li><Icon name="check" />Painting, epoxy floors, repairs, junk removal and deep cleaning</li>
+            <li><Icon name="check" />Property managers: <a class="link-inline" href="/property-managers/">make-ready in 24 to 48 hours</a></li>
+          </ul>
+        </div>
+        <QuoteForm variant="full" title="Request a quote" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap">
+      <div class="section-head"><h2>What happens next</h2></div>
+      <ol class="steps">
+        <li><span class="step-n" aria-hidden="true">1</span><h3>We get your request</h3><p>Your details go straight to our phone and email.</p></li>
+        <li><span class="step-n" aria-hidden="true">2</span><h3>We call you back</h3><p>We ask a few questions about the job and the space.</p></li>
+        <li><span class="step-n" aria-hidden="true">3</span><h3>You get a clear price</h3><p>We confirm the scope and the cost before any work starts.</p></li>
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

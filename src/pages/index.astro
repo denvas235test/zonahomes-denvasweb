@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import ZoneMap from '../components/ZoneMap.astro';
+import Faq from '../components/Faq.astro';
+import { services } from '../data/services';
+import { cities } from '../data/cities';
+import { SITE, TIER_TEXT, townsByTier } from '../data/site';
+
+const epoxy = services.find((s) => s.slug === 'epoxy-garage-floors')!;
+const faqs = [
+  { q: 'What services does Zona Homes Services offer?', a: 'Interior and exterior painting, epoxy and garage floors, repairs and handyman work, junk removal and deep cleaning, plus make-ready service for property managers.' },
+  { q: 'Where do you work?', a: 'We are based in Sebring, FL and serve Avon Park, Lake Placid and nearby cities, driving up to about 60 miles for the right job.' },
+  { q: 'How do I get a quote?', a: 'Call (863) 449-1949 or fill in the quote form at the top of this page. Tell us what you need and we will call you back.' },
+  { q: 'Do you work with property managers and landlords?', a: 'Yes. We turn units with painting, deep cleaning, junk removal and small repairs from one crew, usually in 24 to 48 hours.' },
+];
+const jsonLd = [
+  { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url + '/', name: SITE.name, publisher: { '@id': `${SITE.url}/#business` } },
+  { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<BaseLayout
+  title="Painting, Epoxy Floors & Repairs in Sebring, FL | Zona Homes"
+  description="Zona Homes Services in Sebring, FL: interior and exterior painting, epoxy garage floors, repairs, junk removal and deep cleaning. Call (863) 449-1949."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Painting, epoxy floors and home repairs in Sebring</h1>
+          <p class="lead">Paint it, fix it, clean it, haul the junk. One crew handles the whole job in Sebring, Avon Park, Lake Placid and cities up to 60 miles around.</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+            <a class="btn btn-line" href="/services/">See our services</a>
+          </div>
+          <p class="slogan">{SITE.slogan}</p>
+        </div>
+        <QuoteForm variant="short" note="Tell us what you need and we will call you back." />
+      </div>
+      <div class="hero-strip">
+        <Img class="hero-img" id="zona-hero-painted-living-room" widths={[640, 960, 1280, 1600]} sizes="(min-width: 1200px) 1160px, 92vw" width={2752} height={1536}
+          alt="Freshly painted living room with white walls and a gray accent wall, with a drop cloth and paint tray on the floor" eager />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we do</h2>
+        <p>One crew for the paint, the floor, the repairs and the cleanup.</p>
+      </div>
+      <div class="service-grid">
+        {services.map((s) => (
+          <article class="service">
+            <a class="service-title-link" href={`/services/${s.slug}/`} aria-label={s.name}>
+              <Img class="service-img" id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 1001px) 360px, (min-width: 641px) 45vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
+              <h3>{s.name}</h3>
+            </a>
+            <p>{s.card}</p>
+            <a class="text-link" href={`/services/${s.slug}/`}>Learn more</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="spotlight">
+    <div class="wrap spotlight-grid">
+      <div class="spotlight-media">
+        <Img class="spotlight-img" id="zona-epoxy-garage-featured" widths={[480, 720, 960]} sizes="(min-width: 861px) 40vw, 92vw" width={1792} height={2400}
+          alt="Two-car garage with a freshly coated gray epoxy floor and the garage door open" />
+      </div>
+      <div class="spotlight-copy">
+        <h2>A garage floor that wipes clean</h2>
+        <p>Epoxy turns a stained, dusty slab into a smooth surface you can sweep and mop. We prepare the concrete, apply the coating and finish it with decorative flakes in the color mix you pick.</p>
+        <ul class="checks">
+          <li><Icon name="check" />Seamless surface with no grout lines to trap dirt</li>
+          <li><Icon name="check" />Your choice of base color and flake mix</li>
+          <li><Icon name="check" />Works for garages, workshops and rental turnovers</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href={`/services/${epoxy.slug}/`}>About epoxy floors</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pm" id="property-managers">
+    <div class="wrap pm-grid">
+      <div>
+        <h2>Property managers: unit turns in 24 to 48 hours</h2>
+        <p>Send us the unit and we handle the make-ready: paint, deep clean, haul out what was left behind and fix the small stuff. One call, one crew.</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href="/property-managers/">Make-ready service</a>
+        </div>
+      </div>
+      <ul class="checks checks-two">
+        <li><Icon name="check" />Interior painting</li>
+        <li><Icon name="check" />Deep cleaning</li>
+        <li><Icon name="check" />Junk removal</li>
+        <li><Icon name="check" />Small repairs and handyman</li>
+        <li><Icon name="check" />Epoxy and garage floors</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head"><h2>How it works</h2></div>
+      <ol class="steps">
+        <li><span class="step-n" aria-hidden="true">1</span><h3>Call or send the form</h3><p>Tell us what needs to be done and where.</p></li>
+        <li><span class="step-n" aria-hidden="true">2</span><h3>We size up the job</h3><p>You get a clear price before any work starts.</p></li>
+        <li><span class="step-n" aria-hidden="true">3</span><h3>We do the work and clean up</h3><p>We leave the space ready to use.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section areas" id="areas">
+    <div class="wrap areas-grid">
+      <div class="areas-copy">
+        <h2>Where we work</h2>
+        <p>We are based in Sebring and drive up to 60 miles for the right job. Not on the list? Call and ask.</p>
+        <dl class="tiers">
+          {(['home', 'near', 'far'] as const).map((t) => (
+            <div>
+              <dt><span class={`key key-${t}`} aria-hidden="true"></span>{TIER_TEXT[t].title}, {TIER_TEXT[t].range}</dt>
+              <dd>{townsByTier(t).map((x, i) => (
+                <>{i > 0 && ', '}{x.page ? <a class="link-inline" href={`/areas/${x.page}/`}>{x.name}</a> : x.name}</>
+              ))}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href="/areas/">All areas we serve</a>
+        </div>
+      </div>
+      <figure class="zone-map">
+        <ZoneMap />
+        <figcaption>Approximate distances from Sebring.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap"><Faq items={faqs} /></div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Ready to get started?</h2>
+      <p>Call now or send the form. Painting, floors, repairs and cleanup in Sebring and the cities around it.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote">Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

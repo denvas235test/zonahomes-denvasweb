@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { services } from '../../data/services';
+import { SITE } from '../../data/site';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Services' }];
+const jsonLd = [
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? '/services/') })) },
+  { '@type': 'ItemList', name: 'Services', itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}/services/${s.slug}/`, name: s.name })) },
+];
+---
+<BaseLayout
+  title="Painting, Epoxy, Repairs & Cleaning in Sebring | Zona Homes"
+  description="Our services in Sebring, FL: interior and exterior painting, epoxy garage floors, handyman repairs, junk removal and deep cleaning. Call (863) 449-1949."
+  path="/services/"
+  jsonLd={jsonLd}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Home services in Sebring, FL</h1>
+          <p class="lead">Painting, epoxy floors, repairs, junk removal and deep cleaning from one crew. Pick the job you need, or call and tell us the whole list.</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+            <a class="btn btn-line" href="/property-managers/">Property managers</a>
+          </div>
+        </div>
+        <QuoteForm variant="short" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="service-grid">
+        {services.map((s) => (
+          <article class="service">
+            <a class="service-title-link" href={`/services/${s.slug}/`} aria-label={s.name}>
+              <Img class="service-img" id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 1001px) 360px, (min-width: 641px) 45vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
+              <h3>{s.name}</h3>
+            </a>
+            <p>{s.card}</p>
+            <a class="text-link" href={`/services/${s.slug}/`}>Learn more</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Not sure which service you need?</h2>
+      <p>Call and describe the job. We will tell you what we can do and what it costs.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote">Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

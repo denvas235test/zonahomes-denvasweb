@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Img from '../../components/Img.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Faq from '../../components/Faq.astro';
+import { services, serviceBySlug } from '../../data/services';
+import { cities } from '../../data/cities';
+import { SITE, TOWNS } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { slug: s.slug } }));
+}
+const { slug } = Astro.props;
+const s = serviceBySlug(slug);
+const path = `/services/${s.slug}/`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Services', href: '/services/' }, { name: s.name }];
+const related = s.related.map(serviceBySlug);
+
+const jsonLd = [
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? path) })) },
+  {
+    '@type': 'Service',
+    name: s.h1,
+    serviceType: s.schemaType,
+    description: s.metaDescription,
+    url: SITE.url + path,
+    provider: { '@id': `${SITE.url}/#business` },
+    areaServed: TOWNS.map((t) => ({ '@type': 'City', name: t.name })),
+  },
+  { '@type': 'FAQPage', mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+---
+<BaseLayout title={s.metaTitle} description={s.metaDescription} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>{s.h1}</h1>
+          <p class="lead">{s.intro[0]}</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          </div>
+        </div>
+        <QuoteForm variant="short" service={s.formValue} note="Tell us about the job and we will call you back." />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap split">
+      <div class="prose">
+        <p>{s.intro[1]}</p>
+        <h2>{s.includesTitle}</h2>
+        <ul class="checks">
+          {s.includes.map((i) => <li><Icon name="check" />{i}</li>)}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href="#quote" data-service={s.formValue}>Get a quote</a>
+        </div>
+      </div>
+      <Img class={`split-img${s.imgW > s.imgH ? ' is-wide' : ''}`} id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 861px) 40vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="section-head"><h2>How the job goes</h2></div>
+      <ol class="process">
+        {s.process.map((p) => <li><h3>{p.title}</h3><p>{p.text}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-tight section-white">
+    <div class="wrap">
+      <div class="section-head"><h2>Good to know</h2></div>
+      <div class="tips">
+        {s.tips.map((t) => <article><h3>{t.title}</h3><p>{t.text}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap"><Faq items={s.faqs} title={`${s.name}: common questions`} /></div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap">
+      <div class="section-head"><h2>Other services</h2></div>
+      <div class="link-grid">
+        {related.map((r) => <a href={`/services/${r.slug}/`}><strong>{r.name}</strong><span>{r.card}</span></a>)}
+      </div>
+      <p style="margin-top:2rem"><strong style="color:var(--ink)">{s.name} near you:</strong></p>
+      <div class="city-chips">
+        {cities.map((c) => <a href={`/areas/${c.slug}/`}>{c.name}</a>)}
+        <a href="/areas/">More areas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Ready to get started?</h2>
+      <p>Call now or send the form and we will get back to you about the job.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote" data-service={s.formValue}>Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

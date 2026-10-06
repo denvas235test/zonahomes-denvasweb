@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+<BaseLayout
+  title="Privacy Policy | Zona Homes Services"
+  description="How Zona Homes Services LLC handles the information you send through the quote form on this website."
+  path="/privacy/"
+  hasQuote={false}
+>
+  <section class="section legal">
+    <div class="wrap">
+      <h1>Privacy policy</h1>
+      <p>Last updated: October 2026.</p>
+      <p>Zona Homes Services LLC ("we", "us") operates this website. This page explains what information we collect through the site and how we use it.</p>
+
+      <h2>What we collect</h2>
+      <p>When you send a quote request, we collect the details you type into the form: your name, phone number, city, the service you need and any job details you add. We also record the page you sent the form from.</p>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To call you back about your request and give you a quote.</li>
+        <li>To schedule and carry out work you ask us to do.</li>
+      </ul>
+      <p>We do not sell your information.</p>
+
+      <h2>Who processes the form</h2>
+      <p>Quote requests are delivered to us by Web3Forms, a form service. It receives the information in the form so it can pass it to us.</p>
+
+      <h2>Phone calls</h2>
+      <p>If you call {SITE.phoneDisplay}, we use your number to respond to your call.</p>
+
+      <h2>Cookies and tracking</h2>
+      <p>This website does not set advertising cookies. If we add analytics in the future, this page will be updated.</p>
+
+      <h2>Your choices</h2>
+      <p>To ask us to delete the information you sent us, call <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>.</p>
+
+      <h2>Contact</h2>
+      <p>Zona Homes Services LLC, Sebring, FL. Phone: {SITE.phoneDisplay}.</p>
+    </div>
+  </section>
+</BaseLayout>

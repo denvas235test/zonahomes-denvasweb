@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zonahomes-denvasweb.vercel.app/sitemap-index.xml

@@ -1,0 +1,104 @@
+---
+import { SITE, cityOptions } from '../data/site';
+import { services } from '../data/services';
+
+interface Props {
+  variant?: 'short' | 'full';
+  service?: string;     // preselected service value
+  id?: string;
+  title?: string;
+  note?: string;
+}
+const { variant = 'short', service = '', id = 'quote', title = 'Get a quote', note } = Astro.props;
+const uid = `${id}-${variant}`;
+const serviceOptions = [...services.map((s) => s.formValue), 'Make-ready for property managers', 'Other'];
+---
+<div class={`quote-card quote-${variant}`} id={id}>
+  <h2 class="quote-title">{title}</h2>
+  {note && <p class="quote-note">{note}</p>}
+  <form class="quote-form js-quote-form" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+    <input type="hidden" name="subject" value="New quote request - Zona Homes Services website" />
+    <input type="hidden" name="from_name" value="Zona Homes Services website" />
+    <input type="hidden" name="page" value="" />
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div class="field">
+      <label for={`${uid}-name`}>Name</label>
+      <input id={`${uid}-name`} name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for={`${uid}-phone`}>Phone</label>
+      <input id={`${uid}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+    </div>
+    {variant === 'full' && (
+      <div class="field">
+        <label for={`${uid}-city`}>City</label>
+        <select id={`${uid}-city`} name="city" required>
+          <option value="" disabled selected>Choose your city</option>
+          {cityOptions.map((c) => <option>{c}</option>)}
+        </select>
+      </div>
+    )}
+    <div class={`field ${variant === 'short' ? 'field-wide' : ''}`}>
+      <label for={`${uid}-service`}>Service</label>
+      <select id={`${uid}-service`} name="service" class="js-service" required>
+        <option value="" disabled selected={!service}>What do you need?</option>
+        {serviceOptions.map((o) => <option selected={o === service}>{o}</option>)}
+      </select>
+    </div>
+    {variant === 'full' && (
+      <div class="field field-wide">
+        <label for={`${uid}-details`}>Job details (optional)</label>
+        <textarea id={`${uid}-details`} name="message" rows="4" placeholder="Rooms, size of the garage, timing, anything we should know"></textarea>
+      </div>
+    )}
+    <div class="field-wide form-actions">
+      <button class="btn btn-gold" type="submit">Send quote request</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+  <p class="quote-call">Prefer to talk? Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a></p>
+</div>
+
+<script>
+  // Every quote form on the page: submit through Web3Forms without leaving the page.
+  document.querySelectorAll<HTMLFormElement>('.js-quote-form').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const page = form.querySelector<HTMLInputElement>('input[name="page"]');
+    if (page) page.value = location.href;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      status.className = 'form-status';
+      status.textContent = 'Sending...';
+      submit.disabled = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error('failed');
+        form.reset();
+        if (page) page.value = location.href;
+        status.className = 'form-status is-ok';
+        status.textContent = 'Thanks, we got your request. We will call you back soon.';
+      } catch {
+        status.className = 'form-status is-error';
+        status.textContent = 'The form did not send. Please call (863) 449-1949 or try again.';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  });
+
+  // "Get a quote" links with data-service pre-select that service in the first form on the page.
+  document.querySelectorAll<HTMLAnchorElement>('a[data-service]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const select = document.querySelector<HTMLSelectElement>('.js-service');
+      if (!select) return;
+      const wanted = link.dataset.service;
+      for (const opt of Array.from(select.options)) if (opt.text === wanted) { select.value = opt.value || opt.text; break; }
+    });
+  });
+</script>

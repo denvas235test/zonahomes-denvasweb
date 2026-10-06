@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import ZoneMap from '../../components/ZoneMap.astro';
+import { cities } from '../../data/cities';
+import { SITE, TIER_TEXT, townsByTier } from '../../data/site';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Areas' }];
+const jsonLd = [
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? '/areas/') })) },
+];
+const withoutPage = ['near', 'far'] as const;
+---
+<BaseLayout
+  title="Areas We Serve Around Sebring, FL | Zona Homes Services"
+  description="Zona Homes Services is based in Sebring, FL and serves Avon Park, Lake Placid, Lake Wales, Winter Haven, Lakeland and nearby cities up to 60 miles away."
+  path="/areas/"
+  jsonLd={jsonLd}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Areas we serve around Sebring, FL</h1>
+          <p class="lead">We are based in Sebring and drive up to about 60 miles for painting, epoxy floors, repairs, junk removal and deep cleaning. Not on the list? Call and ask.</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          </div>
+        </div>
+        <QuoteForm variant="short" note="Tell us your city and what you need." />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap areas-grid">
+      <div class="areas-copy">
+        <h2>Cities by distance</h2>
+        <dl class="tiers">
+          {(['home', 'near', 'far'] as const).map((t) => (
+            <div>
+              <dt><span class={`key key-${t}`} aria-hidden="true"></span>{TIER_TEXT[t].title}, {TIER_TEXT[t].range}</dt>
+              <dd>{townsByTier(t).map((x, i) => (
+                <>{i > 0 && ', '}{x.page ? <a class="link-inline" href={`/areas/${x.page}/`}>{x.name}</a> : x.name}</>
+              ))}</dd>
+            </div>
+          ))}
+        </dl>
+        <p>Distances are approximate and measured from Sebring.</p>
+      </div>
+      <figure class="zone-map">
+        <ZoneMap />
+        <figcaption>Approximate distances from Sebring.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="section-head"><h2>Our home-base cities</h2></div>
+      <div class="link-grid">
+        {cities.map((c) => <a href={`/areas/${c.slug}/`}><strong>{c.name}, FL</strong><span>Painting, epoxy floors, repairs, junk removal and deep cleaning in {c.name}.</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Tell us where the job is</h2>
+      <p>Call or send the form with your city and what you need.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote">Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

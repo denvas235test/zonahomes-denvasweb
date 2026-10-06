@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import { SITE, TOWNS } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;                 // e.g. "/services/interior-painting/"
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+  hasQuote?: boolean;           // page has the #quote form
+}
+const { title, description, path, jsonLd = [], noindex = false, hasQuote = true } = Astro.props;
+const canonical = new URL(path, SITE.url).href;
+const ogImage = new URL(SITE.ogImage, SITE.url).href;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'HousePainter',
+  '@id': `${SITE.url}/#business`,
+  name: SITE.name,
+  url: SITE.url + '/',
+  description: 'Interior and exterior painting, epoxy garage floors, repairs, junk removal and deep cleaning in Sebring, FL and nearby cities.',
+  telephone: SITE.phoneTel,
+  slogan: SITE.slogan,
+  image: ogImage,
+  address: { '@type': 'PostalAddress', addressLocality: SITE.locality, addressRegion: SITE.region, addressCountry: 'US' },
+  areaServed: TOWNS.map((t) => ({ '@type': 'City', name: t.name })),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#FBFAF7" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zona Homes Services LLC. Painting, epoxy floors and home repairs in Sebring, FL. (863) 449-1949" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
+    {jsonLd.map((node) => <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...node })} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header currentPath={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar quoteHref={hasQuote ? '#quote' : '/contact/'} />
+  </body>
+</html>

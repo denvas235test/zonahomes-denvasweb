@@ -1,0 +1,21 @@
+---
+import { cld, cldSrcset } from '../lib/cld';
+interface Props {
+  id: string; widths?: number[]; sizes?: string; width: number; height: number;
+  alt: string; class?: string; eager?: boolean;
+}
+const { id, widths = [480, 720, 960], sizes = '100vw', width, height, alt, class: cls = '', eager = false } = Astro.props;
+const mid = widths[Math.floor(widths.length / 2)];
+---
+<img
+  class={cls}
+  src={cld(id, mid)}
+  srcset={cldSrcset(id, widths)}
+  sizes={sizes}
+  width={width}
+  height={height}
+  alt={alt}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+  decoding="async"
+/>

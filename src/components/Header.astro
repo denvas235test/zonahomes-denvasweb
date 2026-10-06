@@ -1,0 +1,58 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+import { SITE } from '../data/site';
+const { currentPath = '/' } = Astro.props as { currentPath?: string };
+const is = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsWith(p));
+---
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="Zona Homes Services LLC, home">
+      <Img id="zona-logo-gold-charcoal" widths={[320, 480, 640]} sizes="150px" width={1734} height={625} alt="Zona Homes Services LLC" eager />
+    </a>
+
+    <nav class="main-nav" aria-label="Main">
+      <div class="has-sub">
+        <a href="/services/" aria-current={is('/services/') ? 'page' : undefined}>Services</a>
+        <ul class="sub">
+          {services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+        </ul>
+      </div>
+      <a href="/property-managers/" aria-current={is('/property-managers/') ? 'page' : undefined}>Property managers</a>
+      <a href="/areas/" aria-current={is('/areas/') ? 'page' : undefined}>Areas</a>
+      <a href="/contact/" aria-current={is('/contact/') ? 'page' : undefined}>Contact</a>
+    </nav>
+
+    <a class="btn btn-gold header-call" href={`tel:${SITE.phoneTel}`}><Icon name="phone" /><span><span class="hide-sm">Call </span>{SITE.phoneDisplay}</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span class="icon-open"><Icon name="menu" /></span><span class="icon-close"><Icon name="close" /></span>
+    </button>
+  </div>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <ul class="wrap">
+      <li><a href="/services/">All services</a></li>
+      {services.map((s) => <li class="indent"><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+      <li><a href="/property-managers/">Property managers</a></li>
+      <li><a href="/areas/">Areas we serve</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  }
+</script>

@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Faq from '../components/Faq.astro';
+import { services } from '../data/services';
+import { SITE } from '../data/site';
+
+const path = '/property-managers/';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Property managers' }];
+const faqs = [
+  { q: 'How fast can you turn a unit?', a: 'Most make-ready jobs take 24 to 48 hours, depending on the size of the unit and the work it needs. Tell us the move-out date and we plan around it.' },
+  { q: 'What does a make-ready include?', a: 'Interior painting, deep cleaning, junk removal and small repairs, and epoxy or garage floor work when a unit has a garage. You choose the items for each unit.' },
+  { q: 'How do you price the work?', a: 'By the unit. Send us the details, such as size, condition and what needs doing, and we quote the job before we start.' },
+  { q: 'Can you handle several units at once?', a: 'Tell us how many units you have and when they come open. We plan the schedule around your move-outs.' },
+  { q: 'Which areas do you cover?', a: 'We are based in Sebring and serve Avon Park, Lake Placid and cities up to about 60 miles away, including Lake Wales, Winter Haven, Davenport and Lakeland.' },
+];
+const jsonLd = [
+  { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? path) })) },
+  { '@type': 'Service', name: 'Make-ready and unit turn services for property managers', serviceType: 'Make-ready', provider: { '@id': `${SITE.url}/#business` }, url: SITE.url + path,
+    description: 'Painting, deep cleaning, junk removal and small repairs for rental units, usually in 24 to 48 hours.' },
+  { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+const pick = ['interior-painting', 'deep-cleaning', 'junk-removal', 'repairs-handyman', 'epoxy-garage-floors'].map((slug) => services.find((s) => s.slug === slug)!);
+---
+<BaseLayout
+  title="Make-Ready for Property Managers, Sebring FL | Zona Homes"
+  description="Unit turns in 24 to 48 hours: painting, deep cleaning, junk removal and small repairs for property managers and landlords in Sebring, FL and nearby cities."
+  path={path}
+  jsonLd={jsonLd}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Make-ready for property managers: unit turns in 24 to 48 hours</h1>
+          <p class="lead">Every empty day costs you rent. Send us the unit and we paint, deep clean, haul out what was left behind and fix the small stuff, all with one crew and one call.</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          </div>
+        </div>
+        <QuoteForm variant="short" service="Make-ready for property managers" note="Tell us about the unit and the move-out date." />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What a make-ready includes</h2>
+        <p>Pick what each unit needs. Every item is a service we already do, so you work with one crew instead of four vendors.</p>
+      </div>
+      <div class="link-grid">
+        {pick.map((s) => <a href={`/services/${s.slug}/`}><strong>{s.name}</strong><span>{s.card}</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap split">
+      <div class="prose">
+        <h2>Why one crew shortens the vacancy</h2>
+        <p>When painting, cleaning, repairs and cleanout come from different vendors, each one waits for the one before. A single crew sequences the work itself: haul out, repair, paint, then clean last so the unit is ready for photos and showings.</p>
+        <ul>
+          <li>One call and one quote per unit</li>
+          <li>Work is ordered so cleaning happens after the dust-making jobs</li>
+          <li>Turnaround of 24 to 48 hours for most units</li>
+          <li>Garage and epoxy floor work available for units with garages</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href="#quote" data-service="Make-ready for property managers">Request a make-ready quote</a>
+        </div>
+      </div>
+      <Img class="split-img" id="zona-interior-painting-hallway" widths={[480, 720, 960]} sizes="(min-width: 861px) 40vw, 92vw" width={1792} height={2400}
+        alt="Hallway with freshly painted walls, white doors and trim, painter's tape on a door frame and a roller tray on the floor" />
+    </div>
+  </section>
+
+  <section class="section-tight section-white">
+    <div class="wrap">
+      <div class="section-head"><h2>How a unit turn works</h2></div>
+      <ol class="process">
+        <li><h3>Send the unit details</h3><p>Address, size, move-out date and what needs doing. A short list is enough.</p></li>
+        <li><h3>Get a price per unit</h3><p>We quote the job before we start, so the cost is clear for your owners.</p></li>
+        <li><h3>We do the make-ready</h3><p>Cleanout, repairs, paint and deep clean, in the order that gets the unit ready fastest.</p></li>
+        <li><h3>Unit ready to show</h3><p>We walk through the unit and let you know it is ready.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap"><Faq items={faqs} title="Make-ready questions" /></div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <h2>Have a unit coming open?</h2>
+      <p>Call with the move-out date and we will tell you what we can do and when.</p>
+      <div class="btn-row btn-row-center">
+        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-line" href="#quote" data-service="Make-ready for property managers">Get a quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

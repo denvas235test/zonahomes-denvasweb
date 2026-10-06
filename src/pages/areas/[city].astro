@@ -4,6 +4,7 @@ import Icon from '../../components/Icon.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
 import Faq from '../../components/Faq.astro';
+import Img from '../../components/Img.astro';
 import { cities, cityBySlug } from '../../data/cities';
 import { services } from '../../data/services';
 import { SITE, TOWNS } from '../../data/site';
@@ -33,6 +34,7 @@ const jsonLd = [
             <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           </div>
         </div>
+        <Img class="hero-mobile-img" id="zona-exterior-painting-house" widths={[480, 720, 960]} sizes="92vw" width={2400} height={1792} alt="Single-story Florida home with fresh white paint and a navy blue front door" />
         <QuoteForm variant="short" note={`Tell us what you need in ${c.name} and we will call you back.`} />
       </div>
     </div>

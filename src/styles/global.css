@@ -268,7 +268,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Hero with quote form */
 .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: start; }
 .hero-copy { padding-top: .5rem; }
-.hero-strip { margin-top: clamp(2rem, 4vw, 3.2rem); position: relative; }
+.hero-strip { grid-column: 1 / -1; position: relative; }
+.hero .hero-grid { row-gap: clamp(1.8rem, 3.5vw, 3rem); }
 .hero-strip::before { content: ""; position: absolute; inset: 14px -12px -12px 14px; border: 2px solid var(--gold); border-radius: 4px; }
 .hero-strip .hero-img { position: relative; aspect-ratio: auto; height: clamp(220px, 30vw, 400px); object-position: 50% 62%; }
 .hero-img { aspect-ratio: 5 / 4; }
@@ -392,4 +393,15 @@ body.menu-open { overflow: hidden; }
   .hero { padding-top: 1.6rem; }
   .hero h1 { font-size: 2.35rem; margin-bottom: .9rem; }
   .hero .lead { font-size: 1.08rem; margin-bottom: 1.2rem; }
+}
+
+/* Image before the quote form on phones and tablets */
+.hero-mobile-img { display: none; }
+@media (max-width: 860px) {
+  .hero-grid { gap: 1.4rem; }
+  .hero-grid > .hero-copy { order: 1; }
+  .hero-grid > .hero-strip, .hero-grid > .hero-mobile-img { order: 2; }
+  .hero-grid > .quote-card { order: 3; }
+  .hero-mobile-img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 55%; border-radius: 4px; background: var(--stone); }
+  .hide-on-mobile { display: none; }
 }

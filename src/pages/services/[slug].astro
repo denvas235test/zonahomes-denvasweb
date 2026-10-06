@@ -44,6 +44,7 @@ const jsonLd = [
             <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           </div>
         </div>
+        <Img class="hero-mobile-img" id={s.imageId} widths={[480, 720, 960]} sizes="92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
         <QuoteForm variant="short" service={s.formValue} note="Tell us about the job and we will call you back." />
       </div>
     </div>
@@ -62,7 +63,7 @@ const jsonLd = [
           <a class="btn btn-line" href="#quote" data-service={s.formValue}>Get a quote</a>
         </div>
       </div>
-      <Img class={`split-img${s.imgW > s.imgH ? ' is-wide' : ''}`} id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 861px) 40vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
+      <Img class={`split-img hide-on-mobile${s.imgW > s.imgH ? ' is-wide' : ''}`} id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 861px) 40vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
     </div>
   </section>
 

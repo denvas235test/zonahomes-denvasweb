@@ -541,3 +541,8 @@ body.menu-open { overflow: hidden; }
   .brand img { height: 58px; }
   :root { --header-h: 78px; }
 }
+
+/* Dimmed page behind the open phone menu: tapping it closes the menu */
+.menu-backdrop { position: fixed; inset: var(--header-h) 0 0 0; z-index: 45; background: rgba(20, 26, 14, .5); }
+.menu-backdrop[hidden] { display: none; }
+@media (min-width: 1001px) { .menu-backdrop { display: none !important; } }

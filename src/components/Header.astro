@@ -39,19 +39,32 @@ const is = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsW
     </ul>
   </nav>
 </header>
+<div class="menu-backdrop" hidden></div>
 
 <script>
   const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
   const menu = document.getElementById('mobile-menu');
-  if (btn && menu) {
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const backdrop = document.querySelector<HTMLElement>('.menu-backdrop');
+  if (btn && menu && header && backdrop) {
+    const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
     const set = (open: boolean) => {
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       menu.hidden = !open;
+      backdrop.hidden = !open;
       document.body.classList.toggle('menu-open', open);
     };
-    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    btn.addEventListener('click', () => set(!isOpen()));
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    // tap anywhere outside the header (the dimmed page) closes the menu
+    backdrop.addEventListener('click', () => set(false));
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !header.contains(e.target as Node)) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) { set(false); btn.focus(); }
+    });
+    window.matchMedia('(min-width: 1001px)').addEventListener('change', (m) => { if (m.matches) set(false); });
   }
 </script>

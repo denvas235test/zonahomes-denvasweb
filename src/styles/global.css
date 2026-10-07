@@ -75,7 +75,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--line); }
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: var(--header-h); }
 .brand { display: block; line-height: 0; }
-.brand img { height: 74px; width: auto; }
+.brand img { height: 66px; width: auto; }
 .main-nav { display: flex; gap: 2rem; margin-left: auto; }
 .main-nav a { text-decoration: none; font-weight: 500; color: var(--ink); padding: .4rem 0; border-bottom: 2px solid transparent; }
 .main-nav a:hover { border-bottom-color: var(--accent); }
@@ -426,7 +426,7 @@ body.menu-open { overflow: hidden; }
 
 /* Header */
 .site-header { background: var(--green-800); border-bottom: 1px solid var(--green-900); }
-.brand img { height: 74px; width: auto; }
+.brand img { height: 66px; width: auto; }
 .main-nav a { color: var(--cream); }
 .main-nav a:hover { border-bottom-color: var(--sand-light); }
 .main-nav a[aria-current="page"] { border-bottom-color: var(--sand-light); }
@@ -546,3 +546,11 @@ body.menu-open { overflow: hidden; }
 .menu-backdrop { position: fixed; inset: var(--header-h) 0 0 0; z-index: 45; background: rgba(20, 26, 14, .5); }
 .menu-backdrop[hidden] { display: none; }
 @media (min-width: 1001px) { .menu-backdrop { display: none !important; } }
+
+/* ===== Client brand: their emblem on the hero photo, gold-ring service icons ===== */
+:root { --gold: #d2af64; }
+.hero-emblem { position: absolute; z-index: 1; top: clamp(1rem, 2.4vw, 2rem); right: max(1.25rem, calc((100vw - 1160px) / 2)); width: clamp(130px, 14vw, 200px); height: auto; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .5)); pointer-events: none; }
+.service-row__icon { background: var(--green-800); border: 1.5px solid var(--gold); color: var(--gold); }
+.foot-logo { height: auto; width: min(100%, 230px); }
+.footer-brand img { height: auto; }
+@media (max-width: 860px) { .hero-emblem { top: .9rem; right: .9rem; width: 112px; } }

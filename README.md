@@ -23,7 +23,7 @@ FAQPage and BreadcrumbList structured data; sitemap at `/sitemap-index.xml` (gen
 clean URLs with trailing slashes; internal links between services, cities and the property-manager page.
 
 ## Logo
-`public/assets/logo-light.png` is the logo recolored for the dark green header and footer (cream and light gold). The original gold and charcoal logo stays on Cloudinary as `zona-logo-gold-charcoal`.
+`public/assets/logo-light.png` is the light logo (house + wave icon from Gemini with the ZONA / HOMES SERVICES text) for the dark green header and footer. Favicons are in `public/` (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-512.png`). The old gold and charcoal logo stays on Cloudinary as `zona-logo-gold-charcoal` but is no longer used.
 
 ## Images
 Photos load from Cloudinary (`kat6qihq`) by public ID, no folders in the URLs. Originals are untouched; the site asks for

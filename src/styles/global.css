@@ -565,3 +565,7 @@ body.menu-open { overflow: hidden; }
   :root { --header-h: 60px; }
   .brand img { height: 40px; }
 }
+
+/* Smaller footer logo (keep this block last) */
+.footer-brand img.foot-logo, .foot-logo { width: 170px; height: auto; margin-bottom: .7rem; }
+@media (max-width: 640px) { .footer-brand img.foot-logo, .foot-logo { width: 150px; } }

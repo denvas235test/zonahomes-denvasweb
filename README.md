@@ -5,8 +5,8 @@ Vercel detects Astro, runs `npm run build` and serves `dist/`.
 
 Live (test): https://zonahomes-denvasweb.vercel.app/
 
-## Pages (16)
-`/`, `/services/`, `/services/<slug>/` x6, `/property-managers/`, `/areas/`, `/areas/<city>/` x3, `/contact/`, `/privacy/`, 404.
+## Pages (18)
+`/`, `/services/`, `/services/<slug>/` x6, `/property-managers/`, `/areas/`, `/areas/<city>/` x5 (Sebring, Avon Park, Lake Placid, Davenport, Sarasota), `/contact/`, `/privacy/`, 404.
 
 ## Where things live
 - `src/data/services.ts` - copy for each service page (intro, what's included, process, tips, FAQs)
@@ -14,13 +14,16 @@ Live (test): https://zonahomes-denvasweb.vercel.app/
 - `src/data/site.ts` - phone, URL, Web3Forms key, list of towns and distance tiers
 - `src/components/` - header, footer, quote form, FAQ, service-area map
 - `src/layouts/BaseLayout.astro` - SEO tags, Open Graph, canonical, JSON-LD
-- `src/styles/global.css` - all styling (light theme, gold accent)
+- `src/styles/global.css` - all styling. Palette (green and cream, from the client's mockup) is in `:root` at the top; dark green bands are the header, property-managers band, final CTA and footer
 - `public/` - favicon and fonts. The share image is `zona-og-cover` on Cloudinary
 
 ## SEO
 Unique title, description, canonical and Open Graph on every page; LocalBusiness (HousePainter), Service,
 FAQPage and BreadcrumbList structured data; sitemap at `/sitemap-index.xml` (generated at build);
 clean URLs with trailing slashes; internal links between services, cities and the property-manager page.
+
+## Logo
+`public/assets/logo-light.png` is the logo recolored for the dark green header and footer (cream and light gold). The original gold and charcoal logo stays on Cloudinary as `zona-logo-gold-charcoal`.
 
 ## Images
 Photos load from Cloudinary (`kat6qihq`) by public ID, no folders in the URLs. Originals are untouched; the site asks for

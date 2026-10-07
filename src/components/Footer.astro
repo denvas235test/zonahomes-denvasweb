@@ -1,5 +1,4 @@
 ---
-import Img from './Img.astro';
 import { services } from '../data/services';
 import { cities } from '../data/cities';
 import { SITE } from '../data/site';
@@ -7,10 +6,10 @@ import { SITE } from '../data/site';
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <Img class="foot-logo" id="zona-logo-gold-charcoal" widths={[320, 480, 640]} sizes="180px" width={1734} height={625} alt="Zona Homes Services LLC" />
+      <img class="foot-logo" src="/assets/logo-light.png" width="480" height="172" alt="Zona Homes Services LLC" />
       <p class="slogan-sm">{SITE.slogan}</p>
       <a class="footer-phone" href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
-      <p>Sebring, FL<br />Serving nearby cities within about 60 miles</p>
+      <p>Sebring, FL<br />Serving nearby cities within about 70 miles</p>
     </div>
     <div>
       <p class="footer-label">Services</p>

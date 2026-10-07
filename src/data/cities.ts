@@ -32,7 +32,7 @@ export const cities: City[] = [
     ],
     nearby: ['Avon Park', 'Lake Placid', 'Frostproof'],
     faqs: [
-      { q: 'Are you based in Sebring?', a: 'Yes. Zona Homes Services is based in Sebring, FL, and we also serve nearby cities within about 60 miles.' },
+      { q: 'Are you based in Sebring?', a: 'Yes. Zona Homes Services is based in Sebring, FL, and we also serve nearby cities within about 70 miles.' },
       { q: 'What services do you offer in Sebring?', a: 'Interior and exterior painting, epoxy and garage floors, repairs and handyman work, junk removal and deep cleaning.' },
       { q: 'Do you work with landlords and property managers in Sebring?', a: 'Yes. We handle unit turns with painting, cleaning, cleanouts and repairs from one crew, usually in 24 to 48 hours.' },
     ],
@@ -83,6 +83,54 @@ export const cities: City[] = [
       { q: 'Do you serve Lake Placid?', a: 'Yes. Lake Placid is part of our home-base area, a short drive south of Sebring.' },
       { q: 'Can you work around a seasonal rental schedule?', a: 'Yes. Tell us the dates you need the home ready and we plan the painting, repairs and cleaning around them.' },
       { q: 'Do you paint exteriors in Lake Placid?', a: 'Yes. We repaint stucco and siding, trim and doors, with repair and priming first so the paint bonds and lasts.' },
+    ],
+  },
+  {
+    slug: 'davenport',
+    name: 'Davenport',
+    metaTitle: 'Painting & Epoxy Floors in Davenport, FL | Zona Homes',
+    metaDescription: 'Interior painting, epoxy garage floors, repairs, junk removal and deep cleaning in Davenport, FL, including rentals and vacation homes. Call (863) 449-1949.',
+    h1: 'Painting, epoxy floors and home repairs in Davenport, FL',
+    intro: 'We travel from our Sebring base to Davenport for painting, epoxy garage floors, repairs, junk removal and deep cleaning. Many homes here are newer subdivisions, second homes and rentals, so the work is often about a clean finish and a quick turnaround.',
+    sections: [
+      {
+        title: 'Homes we work on in Davenport',
+        text: 'Newer homes often come with bare concrete garages, builder-grade paint that scuffs easily and plain white walls. That makes interior repainting, epoxy garage floors and touch-up work common requests. We also repair drywall and trim before painting so the finish looks smooth.',
+      },
+      {
+        title: 'Rentals and vacation homes',
+        text: 'Owners and property managers around Davenport need units ready between guests or tenants. We handle painting, deep cleaning, junk removal and small repairs with one crew, usually in 24 to 48 hours. Tell us the dates and we plan the work around them.',
+      },
+    ],
+    nearby: ['Haines City', 'Winter Haven', 'Lakeland'],
+    faqs: [
+      { q: 'Do you serve Davenport?', a: 'Yes. We are based in Sebring, FL and travel to Davenport for jobs. Tell us your address when you call so we can plan the visit.' },
+      { q: 'Can you turn a rental or vacation home between guests?', a: 'Yes. We paint, deep clean, haul away leftovers and make small repairs, usually in 24 to 48 hours. See our make-ready service for property managers.' },
+      { q: 'Do you do epoxy garage floors in Davenport?', a: 'Yes. We coat garage floors with epoxy and decorative flakes in the colors you choose.' },
+    ],
+  },
+  {
+    slug: 'sarasota',
+    name: 'Sarasota',
+    metaTitle: 'Painting & Epoxy Floors in Sarasota, FL | Zona Homes',
+    metaDescription: 'Interior and exterior painting, epoxy garage floors, repairs, junk removal and deep cleaning in Sarasota, Bradenton and Lakewood Ranch. Call (863) 449-1949.',
+    h1: 'Painting, epoxy floors and home repairs in Sarasota, FL',
+    intro: 'Sarasota is one of the cities we travel to from our Sebring base. We paint, coat garage floors with epoxy, make small repairs, haul away junk and deep clean homes and rentals in Sarasota, Bradenton and Lakewood Ranch.',
+    sections: [
+      {
+        title: 'Homes we work on in Sarasota',
+        text: 'Homes near the Gulf deal with salt air, strong sun and humidity, which wear exterior paint faster. We repair cracks, caulk, prime and repaint exteriors, and we can add garage doors and garage floors to the same project. Inside, we repaint, repair drywall and clean up so the home is ready to use.',
+      },
+      {
+        title: 'Planning the visit',
+        text: 'We are based in Sebring, so tell us your address and what you need when you call. We confirm the scope and the price before we come, and we plan the schedule with you.',
+      },
+    ],
+    nearby: ['Bradenton', 'Lakewood Ranch', 'Arcadia'],
+    faqs: [
+      { q: 'Are you based in Sarasota?', a: 'No. We are based in Sebring, FL and travel to Sarasota, Bradenton and Lakewood Ranch for jobs.' },
+      { q: 'What services do you offer in Sarasota?', a: 'Interior and exterior painting, epoxy and garage floors, repairs and handyman work, junk removal and deep cleaning.' },
+      { q: 'How do I get a quote for a job in Sarasota?', a: 'Call (863) 449-1949 or send the quote form with your address and a short description of the job, and we will call you back.' },
     ],
   },
 ];

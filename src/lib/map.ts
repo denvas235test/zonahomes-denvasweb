@@ -1,7 +1,7 @@
 import { TOWNS } from '../data/site';
 
 const CENTER = { lat: 27.4956, lon: -81.4409 };
-export const MAP = { size: 640, c: 320, scale: 4.83 }; // px per mile; 60 mi = 290 px
+export const MAP = { size: 640, c: 320, scale: 4.14 }; // px per mile; 70 mi = 290 px
 
 export function project(lat: number, lon: number) {
   const dy = (lat - CENTER.lat) * 69.0;
@@ -10,9 +10,10 @@ export function project(lat: number, lon: number) {
 }
 
 export const rings = [
-  { mi: 60, fill: 'rgba(184,134,11,.045)' },
-  { mi: 40, fill: 'rgba(184,134,11,.07)' },
-  { mi: 20, fill: 'rgba(184,134,11,.11)' },
+  { mi: 70, fill: 'rgba(62,74,45,.035)' },
+  { mi: 60, fill: 'rgba(62,74,45,.05)' },
+  { mi: 40, fill: 'rgba(62,74,45,.08)' },
+  { mi: 20, fill: 'rgba(62,74,45,.12)' },
 ];
 
 export const mapTowns = TOWNS.filter((t) => t.name !== 'Sebring').map((t) => ({ ...t, ...project(t.lat, t.lon) }));

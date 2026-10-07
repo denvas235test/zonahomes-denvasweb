@@ -4,14 +4,16 @@ const c = MAP.c, s = MAP.scale;
 ---
 <svg viewBox="0 0 640 640" role="img" aria-labelledby="zm-title zm-desc" xmlns="http://www.w3.org/2000/svg">
   <title id="zm-title">Service area map around Sebring, Florida</title>
-  <desc id="zm-desc">Rings mark 20, 40 and 60 miles from Sebring. Avon Park, Lake Placid and Frostproof are within 20 miles; Wauchula, Lake Wales, Arcadia and Bartow within 40; Winter Haven, Okeechobee, Haines City, Davenport and Lakeland within 60.</desc>
+  <desc id="zm-desc">Rings mark 20, 40, 60 and 70 miles from Sebring. Avon Park, Lake Placid and Frostproof are within 20 miles; Wauchula, Lake Wales, Arcadia and Bartow within 40; Winter Haven, Okeechobee, Haines City, Davenport, Lakeland and Lakewood Ranch within 60; Sarasota and Bradenton within 70.</desc>
   {rings.map((r) => <circle class="zm-ring" cx={c} cy={c} r={(r.mi * s).toFixed(1)} fill={r.fill} />)}
   {[20, 40, 60].map((mi) => <text class="zm-ring-label" x={(c + mi * s - 9).toFixed(1)} y={c - 9} text-anchor="end">{mi} mi</text>)}
+  <text class="zm-ring-label" x={c} y={(c - 70 * s + 24).toFixed(1)} text-anchor="middle">70 mi</text>
   {mapTowns.map((t) => (
     <>
-      {t.tier === 'home' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6" fill="#b8860b" />}
-      {t.tier === 'near' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6.5" fill="#1e1f22" />}
-      {t.tier === 'far' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6" fill="#ffffff" stroke="#1e1f22" stroke-width="2.5" />}
+      {t.tier === 'home' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6" fill="#3e4a2d" />}
+      {t.tier === 'near' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6.5" fill="#1e2318" />}
+      {t.tier === 'far' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6" fill="#ffffff" stroke="#1e2318" stroke-width="2.5" />}
+      {t.tier === 'ext' && <circle cx={t.x.toFixed(1)} cy={t.y.toFixed(1)} r="6.5" fill="#b8a877" stroke="#323a23" stroke-width="2.5" />}
       <text
         class={`zm-label${t.tier === 'home' ? ' zm-label-home' : ''}${t.secondary ? ' zm-sec' : ''}`}
         x={(t.x + t.label.dx).toFixed(1)} y={(t.y + t.label.dy).toFixed(1)} text-anchor={t.label.anchor}
@@ -19,8 +21,8 @@ const c = MAP.c, s = MAP.scale;
     </>
   ))}
   <g transform={`translate(${c} ${c}) scale(0.62)`}>
-    <path d="M0 0C-8 -13 -20 -22 -20 -34a20 20 0 0 1 40 0C20 -22 8 -13 0 0z" fill="#b8860b" stroke="#fbfaf7" stroke-width="3" />
-    <circle cx="0" cy="-34" r="8" fill="#fbfaf7" />
+    <path d="M0 0C-8 -13 -20 -22 -20 -34a20 20 0 0 1 40 0C20 -22 8 -13 0 0z" fill="#3e4a2d" stroke="#f4f0e6" stroke-width="3" />
+    <circle cx="0" cy="-34" r="8" fill="#f4f0e6" />
   </g>
   <text class="zm-center" x={c} y={c + 27} text-anchor="middle">Sebring</text>
 </svg>

@@ -12,7 +12,7 @@ import { SITE, TIER_TEXT, townsByTier } from '../data/site';
 const epoxy = services.find((s) => s.slug === 'epoxy-garage-floors')!;
 const faqs = [
   { q: 'What services does Zona Homes Services offer?', a: 'Interior and exterior painting, epoxy and garage floors, repairs and handyman work, junk removal and deep cleaning, plus make-ready service for property managers.' },
-  { q: 'Where do you work?', a: 'We are based in Sebring, FL and serve Avon Park, Lake Placid and nearby cities, driving up to about 60 miles for the right job.' },
+  { q: 'Where do you work?', a: 'We are based in Sebring, FL and serve Avon Park, Lake Placid, Davenport, Sarasota and nearby cities, driving up to about 70 miles for the right job.' },
   { q: 'How do I get a quote?', a: 'Call (863) 449-1949 or fill in the quote form at the top of this page. Tell us what you need and we will call you back.' },
   { q: 'Do you work with property managers and landlords?', a: 'Yes. We turn units with painting, deep cleaning, junk removal and small repairs from one crew, usually in 24 to 48 hours.' },
 ];
@@ -22,8 +22,8 @@ const jsonLd = [
 ];
 ---
 <BaseLayout
-  title="Painting, Epoxy Floors & Repairs in Sebring, FL | Zona Homes"
-  description="Zona Homes Services in Sebring, FL: interior and exterior painting, epoxy garage floors, repairs, junk removal and deep cleaning. Call (863) 449-1949."
+  title="Painting & Epoxy in Sebring, Davenport, Sarasota | Zona Homes"
+  description="Based in Sebring, FL, serving Davenport, Sarasota and nearby cities: painting, epoxy garage floors, repairs, junk removal and deep cleaning. (863) 449-1949."
   path="/"
   jsonLd={jsonLd}
 >
@@ -31,10 +31,10 @@ const jsonLd = [
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>Painting, epoxy floors and home repairs in Sebring</h1>
-          <p class="lead">Paint it, fix it, clean it, haul the junk. One crew handles the whole job in Sebring, Avon Park, Lake Placid and cities up to 60 miles around.</p>
+          <h1>Painting, epoxy floors and home repairs in Sebring, Davenport and Sarasota</h1>
+          <p class="lead">Paint it, fix it, clean it, haul the junk. One crew handles the whole job in Sebring, Davenport, Sarasota and the cities around them.</p>
           <div class="btn-row">
-            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+            <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
             <a class="btn btn-line" href="/services/">See our services</a>
           </div>
           <p class="slogan">{SITE.slogan}</p>
@@ -84,7 +84,7 @@ const jsonLd = [
           <li><Icon name="check" />Works for garages, workshops and rental turnovers</li>
         </ul>
         <div class="btn-row">
-          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           <a class="btn btn-line" href={`/services/${epoxy.slug}/`}>About epoxy floors</a>
         </div>
       </div>
@@ -97,7 +97,7 @@ const jsonLd = [
         <h2>Property managers: unit turns in 24 to 48 hours</h2>
         <p>Send us the unit and we handle the make-ready: paint, deep clean, haul out what was left behind and fix the small stuff. One call, one crew.</p>
         <div class="btn-row">
-          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           <a class="btn btn-line" href="/property-managers/">Make-ready service</a>
         </div>
       </div>
@@ -126,9 +126,9 @@ const jsonLd = [
     <div class="wrap areas-grid">
       <div class="areas-copy">
         <h2>Where we work</h2>
-        <p>We are based in Sebring and drive up to 60 miles for the right job. Not on the list? Call and ask.</p>
+        <p>We are based in Sebring and drive up to about 70 miles for the right job, including Davenport and Sarasota. Not on the list? Call and ask.</p>
         <dl class="tiers">
-          {(['home', 'near', 'far'] as const).map((t) => (
+          {(['home', 'near', 'far', 'ext'] as const).map((t) => (
             <div>
               <dt><span class={`key key-${t}`} aria-hidden="true"></span>{TIER_TEXT[t].title}, {TIER_TEXT[t].range}</dt>
               <dd>{townsByTier(t).map((x, i) => (
@@ -138,7 +138,7 @@ const jsonLd = [
           ))}
         </dl>
         <div class="btn-row">
-          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           <a class="btn btn-line" href="/areas/">All areas we serve</a>
         </div>
       </div>
@@ -158,7 +158,7 @@ const jsonLd = [
       <h2>Ready to get started?</h2>
       <p>Call now or send the form. Painting, floors, repairs and cleanup in Sebring and the cities around it.</p>
       <div class="btn-row btn-row-center">
-        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
         <a class="btn btn-line" href="#quote">Get a quote</a>
       </div>
     </div>

@@ -15,7 +15,7 @@ const faqs = [
   { q: 'What does a make-ready include?', a: 'Interior painting, deep cleaning, junk removal and small repairs, and epoxy or garage floor work when a unit has a garage. You choose the items for each unit.' },
   { q: 'How do you price the work?', a: 'By the unit. Send us the details, such as size, condition and what needs doing, and we quote the job before we start.' },
   { q: 'Can you handle several units at once?', a: 'Tell us how many units you have and when they come open. We plan the schedule around your move-outs.' },
-  { q: 'Which areas do you cover?', a: 'We are based in Sebring and serve Avon Park, Lake Placid and cities up to about 60 miles away, including Lake Wales, Winter Haven, Davenport and Lakeland.' },
+  { q: 'Which areas do you cover?', a: 'We are based in Sebring and serve Avon Park, Lake Placid and cities up to about 70 miles away, including Lake Wales, Winter Haven, Davenport, Lakeland and Sarasota.' },
 ];
 const jsonLd = [
   { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + (c.href ?? path) })) },
@@ -39,7 +39,7 @@ const pick = ['interior-painting', 'deep-cleaning', 'junk-removal', 'repairs-han
           <h1>Make-ready for property managers: unit turns in 24 to 48 hours</h1>
           <p class="lead">Every empty day costs you rent. Send us the unit and we paint, deep clean, haul out what was left behind and fix the small stuff, all with one crew and one call.</p>
           <div class="btn-row">
-            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+            <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           </div>
         </div>
         <Img class="hero-mobile-img" id="zona-interior-painting-hallway" widths={[480, 720, 960]} sizes="92vw" width={1792} height={2400}
@@ -73,7 +73,7 @@ const pick = ['interior-painting', 'deep-cleaning', 'junk-removal', 'repairs-han
           <li>Garage and epoxy floor work available for units with garages</li>
         </ul>
         <div class="btn-row">
-          <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           <a class="btn btn-line" href="#quote" data-service="Make-ready for property managers">Request a make-ready quote</a>
         </div>
       </div>
@@ -103,7 +103,7 @@ const pick = ['interior-painting', 'deep-cleaning', 'junk-removal', 'repairs-han
       <h2>Have a unit coming open?</h2>
       <p>Call with the move-out date and we will tell you what we can do and when.</p>
       <div class="btn-row btn-row-center">
-        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
         <a class="btn btn-line" href="#quote" data-service="Make-ready for property managers">Get a quote</a>
       </div>
     </div>

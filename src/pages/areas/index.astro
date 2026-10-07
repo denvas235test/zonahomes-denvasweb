@@ -15,7 +15,7 @@ const withoutPage = ['near', 'far'] as const;
 ---
 <BaseLayout
   title="Areas We Serve Around Sebring, FL | Zona Homes Services"
-  description="Zona Homes Services is based in Sebring, FL and serves Avon Park, Lake Placid, Lake Wales, Winter Haven, Lakeland and nearby cities up to 60 miles away."
+  description="Zona Homes Services is based in Sebring, FL and serves Avon Park, Lake Placid, Davenport, Lakeland, Sarasota and nearby cities up to 70 miles away."
   path="/areas/"
   jsonLd={jsonLd}
 >
@@ -25,9 +25,9 @@ const withoutPage = ['near', 'far'] as const;
       <div class="hero-grid">
         <div class="hero-copy">
           <h1>Areas we serve around Sebring, FL</h1>
-          <p class="lead">We are based in Sebring and drive up to about 60 miles for painting, epoxy floors, repairs, junk removal and deep cleaning. Not on the list? Call and ask.</p>
+          <p class="lead">We are based in Sebring and drive up to about 70 miles for painting, epoxy floors, repairs, junk removal and deep cleaning. Not on the list? Call and ask.</p>
           <div class="btn-row">
-            <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+            <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
           </div>
         </div>
         <QuoteForm variant="short" note="Tell us your city and what you need." />
@@ -40,7 +40,7 @@ const withoutPage = ['near', 'far'] as const;
       <div class="areas-copy">
         <h2>Cities by distance</h2>
         <dl class="tiers">
-          {(['home', 'near', 'far'] as const).map((t) => (
+          {(['home', 'near', 'far', 'ext'] as const).map((t) => (
             <div>
               <dt><span class={`key key-${t}`} aria-hidden="true"></span>{TIER_TEXT[t].title}, {TIER_TEXT[t].range}</dt>
               <dd>{townsByTier(t).map((x, i) => (
@@ -60,7 +60,7 @@ const withoutPage = ['near', 'far'] as const;
 
   <section class="section-tight">
     <div class="wrap">
-      <div class="section-head"><h2>Our home-base cities</h2></div>
+      <div class="section-head"><h2>City pages</h2></div>
       <div class="link-grid">
         {cities.map((c) => <a href={`/areas/${c.slug}/`}><strong>{c.name}, FL</strong><span>Painting, epoxy floors, repairs, junk removal and deep cleaning in {c.name}.</span></a>)}
       </div>
@@ -72,7 +72,7 @@ const withoutPage = ['near', 'far'] as const;
       <h2>Tell us where the job is</h2>
       <p>Call or send the form with your city and what you need.</p>
       <div class="btn-row btn-row-center">
-        <a class="btn btn-gold" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+        <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
         <a class="btn btn-line" href="#quote">Get a quote</a>
       </div>
     </div>

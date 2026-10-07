@@ -9,6 +9,8 @@ export interface Service {
   imgH: number;
   imgAlt: string;
   card: string;           // one line for cards
+  short: string;          // very short blurb for the home service row
+  icon: 'roller' | 'house' | 'layers' | 'wrench' | 'trash' | 'spray';
   metaTitle: string;
   metaDescription: string;
   h1: string;
@@ -25,6 +27,8 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'interior-painting',
+    short: 'Walls, ceilings, trim and doors',
+    icon: 'roller',
     name: 'Interior painting',
     formValue: 'Interior painting',
     imageId: 'zona-interior-painting-hallway',
@@ -71,6 +75,8 @@ export const services: Service[] = [
   },
   {
     slug: 'exterior-painting',
+    short: 'Stucco, siding and trim',
+    icon: 'house',
     name: 'Exterior painting',
     formValue: 'Exterior painting',
     imageId: 'zona-exterior-painting-house',
@@ -117,6 +123,8 @@ export const services: Service[] = [
   },
   {
     slug: 'epoxy-garage-floors',
+    short: 'Seamless, easy-to-clean floors',
+    icon: 'layers',
     name: 'Epoxy and garage floors',
     formValue: 'Epoxy / garage floor',
     imageId: 'zona-epoxy-garage-card',
@@ -163,6 +171,8 @@ export const services: Service[] = [
   },
   {
     slug: 'repairs-handyman',
+    short: 'Drywall and small fixes',
+    icon: 'wrench',
     name: 'Repairs and handyman',
     formValue: 'Repairs / handyman',
     imageId: 'zona-drywall-repair',
@@ -209,6 +219,8 @@ export const services: Service[] = [
   },
   {
     slug: 'junk-removal',
+    short: 'Garages, sheds and move-outs',
+    icon: 'trash',
     name: 'Junk removal',
     formValue: 'Junk removal',
     imageId: 'zona-junk-removal-garage',
@@ -254,6 +266,8 @@ export const services: Service[] = [
   },
   {
     slug: 'deep-cleaning',
+    short: 'Kitchens, baths and whole homes',
+    icon: 'spray',
     name: 'Deep cleaning',
     formValue: 'Deep cleaning',
     imageId: 'zona-deep-cleaning-kitchen',

@@ -27,45 +27,37 @@ const jsonLd = [
   path="/"
   jsonLd={jsonLd}
 >
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <h1>Painting, epoxy floors and home repairs in Sebring, Davenport and Sarasota</h1>
-          <p class="lead">Paint it, fix it, clean it, haul the junk. One crew handles the whole job in Sebring, Davenport, Sarasota and the cities around them.</p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
-            <a class="btn btn-line" href="/services/">See our services</a>
-          </div>
-          <p class="slogan">{SITE.slogan}</p>
-        </div>
-        <QuoteForm variant="short" note="Tell us what you need and we will call you back." />
-        <div class="hero-strip">
-          <Img class="hero-img" id="zona-hero-painted-living-room" widths={[640, 960, 1280, 1600]} sizes="(min-width: 1200px) 1160px, 92vw" width={2752} height={1536}
-            alt="Freshly painted living room with white walls and a gray accent wall, with a drop cloth and paint tray on the floor" eager />
+  <section class="hero-photo">
+    <Img class="hero-photo__bg" id="zona-hero-lake-house" widths={[640, 960, 1376]} sizes="100vw" width={1376} height={768}
+      alt="Single-story Florida home with a covered porch and a small dock on a calm lake at sunset" eager />
+    <div class="wrap hero-photo__inner">
+      <div class="hero-copy">
+        <h1>Painting, epoxy floors and home repairs in Sebring, Davenport and Sarasota</h1>
+        <p class="lead">Reliable home services for a cleaner, safer and more beautiful space. Based in Sebring, FL and serving Davenport, Sarasota and the cities around them.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={`tel:${SITE.phoneTel}`}><Icon name="phone" />Call {SITE.phoneDisplay}</a>
+          <a class="btn btn-line" href="#services">Our services</a>
         </div>
       </div>
+      <QuoteForm variant="short" title="Get a quote" />
     </div>
   </section>
 
-  <section class="section" id="services">
+  <section class="service-row-section" id="services">
     <div class="wrap">
-      <div class="section-head">
-        <h2>What we do</h2>
-        <p>One crew for the paint, the floor, the repairs and the cleanup.</p>
-      </div>
-      <div class="service-grid">
+      <h2 class="visually-hidden">What we do</h2>
+      <ul class="service-row">
         {services.map((s) => (
-          <article class="service">
-            <a class="service-title-link" href={`/services/${s.slug}/`} aria-label={s.name}>
-              <Img class="service-img" id={s.imageId} widths={[480, 720, 960]} sizes="(min-width: 1001px) 360px, (min-width: 641px) 45vw, 92vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
-              <h3>{s.name}</h3>
+          <li>
+            <a href={`/services/${s.slug}/`}>
+              <Img class="service-row__img" id={s.imageId} widths={[320, 480]} sizes="(min-width: 1000px) 180px, 45vw" width={s.imgW} height={s.imgH} alt={s.imgAlt} />
+              <span class="service-row__icon"><Icon name={s.icon} /></span>
+              <span class="service-row__name">{s.name}</span>
+              <span class="service-row__short">{s.short}</span>
             </a>
-            <p>{s.card}</p>
-            <a class="text-link" href={`/services/${s.slug}/`}>Learn more</a>
-          </article>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 

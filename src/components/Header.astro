@@ -8,7 +8,7 @@ const is = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsW
 <header class="site-header">
   <div class="wrap header-row">
     <a class="brand" href="/" aria-label="Zona Homes Services LLC, home">
-      <img src="/assets/logo-light.png" width="696" height="300" alt="Zona Homes Services LLC" />
+      <img src="/assets/logo-light.png" width="764" height="300" alt="Zona Homes Services LLC" />
     </a>
 
     <nav class="main-nav" aria-label="Main">
@@ -23,7 +23,7 @@ const is = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsW
       <a href="/contact/" aria-current={is('/contact/') ? 'page' : undefined}>Contact</a>
     </nav>
 
-    <a class="btn btn-primary header-call" href={`tel:${SITE.phoneTel}`}><Icon name="phone" /><span><span class="hide-sm">Call </span>{SITE.phoneDisplay}</span></a>
+    <a class="btn btn-primary header-call" href={`tel:${SITE.phoneTel}`} aria-label={`Call ${SITE.phoneDisplay}`}><Icon name="phone" /><span class="call-text"><span class="hide-sm">Call </span>{SITE.phoneDisplay}</span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
       <span class="icon-open"><Icon name="menu" /></span><span class="icon-close"><Icon name="close" /></span>
     </button>

@@ -34,7 +34,7 @@
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --radius: 6px;
-  --header-h: 90px;
+  --header-h: 94px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -75,7 +75,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--line); }
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: var(--header-h); }
 .brand { display: block; line-height: 0; }
-.brand img { height: 70px; width: auto; }
+.brand img { height: 74px; width: auto; }
 .main-nav { display: flex; gap: 2rem; margin-left: auto; }
 .main-nav a { text-decoration: none; font-weight: 500; color: var(--ink); padding: .4rem 0; border-bottom: 2px solid transparent; }
 .main-nav a:hover { border-bottom-color: var(--accent); }
@@ -426,7 +426,7 @@ body.menu-open { overflow: hidden; }
 
 /* Header */
 .site-header { background: var(--green-800); border-bottom: 1px solid var(--green-900); }
-.brand img { height: 70px; width: auto; }
+.brand img { height: 74px; width: auto; }
 .main-nav a { color: var(--cream); }
 .main-nav a:hover { border-bottom-color: var(--sand-light); }
 .main-nav a[aria-current="page"] { border-bottom-color: var(--sand-light); }
@@ -463,7 +463,8 @@ body.menu-open { overflow: hidden; }
 .mobile-bar { background: var(--paper); }
 
 @media (max-width: 640px) {
-  .brand img { height: 50px; }
+  .brand img { height: 58px; }
+  :root { --header-h: 78px; }
 }
 
 /* ===== Photo hero (home) ===== */
@@ -530,4 +531,13 @@ body.menu-open { overflow: hidden; }
   .service-row { grid-template-columns: repeat(2, 1fr); }
   .hero-photo .quote-form { grid-template-columns: 1fr; }
   .hero-photo .quote-form .field-wide:not(.form-actions) { grid-column: 1 / -1; }
+}
+
+/* Wider two-line logo: keep the phone header compact */
+@media (max-width: 640px) {
+  .header-call .call-text { display: none; }
+  .header-call { padding: .7rem .8rem; }
+  .header-row { gap: .7rem; }
+  .brand img { height: 58px; }
+  :root { --header-h: 78px; }
 }
